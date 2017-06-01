@@ -6,7 +6,7 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-locale                   : "en"
+locale                   : "zh-CN"
 title                    : "ServiceComb"
 title_separator          : "-"
 name                     : "ServiceComb"
@@ -78,8 +78,8 @@ analytics:
 # Site Author
 author:
   name             : *name
-  avatar           : "/assets/images/ServiceComb-logo1.jpg"
-  bio              : "ServiceComb Java Chassis is a Software Development Kit (SDK) for rapid development of microservices in Java, providing service registration, service discovery, dynamic routing, and service management features."
+  avatar           : "/assets/images/ServiceComb-logo-2.png"
+  bio              : "ServiceComb提供了一套关于服务注册，服务发现，服务配置以及管理功能的微服务框架"
   location         : "China"
   email            :
   uri              :
@@ -135,8 +135,6 @@ exclude:
   - Rakefile
   - README
   - tmp
-  - /docs # ignore Minimal Mistakes /docs
-  - /test # ignore Minimal Mistakes /test
 keep_files:
   - .git
   - .svn
@@ -244,3 +242,27 @@ defaults:
       comments: # true
       share: true
       related: true
+  # _docs
+  - scope:
+      path: ""
+      type: docs
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: true
+      sidebar:
+        nav: "docs"
+  # _about
+  - scope:
+      path: ""
+      type: about
+    values:
+      layout: single
+      read_time: false
+      author_profile: false
+      share: true
+      comments: false
+      sidebar:
+        nav: "about"

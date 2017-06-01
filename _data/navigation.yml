@@ -1,12 +1,26 @@
 # main links
 main:
-  - title: "Quick-Start Guide"
-    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
+  - title: "快速入门"
+    url: /docs/quick-start-guide/
+  - title: "用户手册"
+    url: /docs/user-guide/
+  - title: "博文"
+    url: /year-archive/
+  - title: "关于"
+    url: /about/
   # - title: "Sample Posts"
   #   url: /year-archive/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+
+docs:
+  - title: "用户手册"
+    children:
+      - title: "快速入门"
+        url: /docs/quick-start-guide/
+      - title: "ServiceComb是什么"
+        url: /docs/motivation/
+      - title: "Simple Example"
+        url: /docs/simple-example/
