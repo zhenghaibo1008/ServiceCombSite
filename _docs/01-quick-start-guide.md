@@ -98,6 +98,6 @@ cse:
       version-rule: 0.0.1
 ```
 
-如果您安装的是原生docker，IP为 127.0.0.1，如果安装的是docker machine则IP为通过`docker-machine ip`指令获取的IP。同时端口则通过`docker ps`指令获取到容器seanyinx/sc映射的端口为32771
+如果您安装的是原生docker，IP为 127.0.0.1，如果安装的是docker machine则IP为通过`docker-machine ip`指令获取的IP。同时端口则通过`docker ps`指令获取到容器seanyinx/sc映射的PORT为32771。则对于原生docker来说microservice.yaml中 **http://IP:PORT** 为http://**127.0.0.1:32771**
 
 运行JaxrsClient的main函数则能看到client成功调用了微服务。
