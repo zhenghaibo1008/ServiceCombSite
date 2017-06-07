@@ -16,8 +16,7 @@ redirect_from:
 
 
 1. JDK 1.8
-2. Docker 17.03.01-ce
-3. Maven 3.5.0 
+2. Maven 3.5.0 
 
 
 ## 安装
@@ -47,57 +46,60 @@ redirect_from:
 ```
 
 ## 运行Demo
+### 首先运行Service Center
 
-拿demo-jaxrs工作做例子，运行demo-jaxrs-server的docker镜像
+有两种方式运行Service Center:
 
-```bash
-> cd java-chassis/demo/demo-jaxrs/jaxrs-client
-> mvn clean install -Pdocker -Ddocker.keepRunning=true
-```
+#### 1. 通过运行二进制文件：
 
-运行后查看运行的镜像
 
 ```bash
-> docker ps
+> curl -o etcd.zip 'https://github-production-release-asset-2e65be.s3.amazonaws.com/11225014/28ead7c6-3c88-11e7-83a2-338ef5ea1ba9?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20170607%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20170607T150952Z&X-Amz-Expires=300&X-Amz-Signature=1f2be15362d98feb9306b7a19c1c713953db4b552ec58bf258d1927f725f2966&X-Amz-SignedHeaders=host&actor_id=20241845&response-content-disposition=attachment%3B%20filename%3Detcd-v3.1.8-darwin-amd64.zip&response-content-type=application%2Foctet-stream'
+> unzip -o etcd.zip
+> cd etcd/
+> ./etcd
+> go get github.com/ServiceComb/service-center
+> cd $GOPATH/src/github.com/ServiceComb/service-center/
+> go build
+```
+**Note:**首先下载3.X版本之上的ETCD的二进制版本并运行（当前例子实在MAC之下），然后下载Service-center源码并Build。
+{: .notice--warning}
+
+
+将配置文件etc/conf/app.conf移到文件夹conf下并修改相应的参数
 
 ```
+manager_cluster = "127.0.0.1:2379"
+httpport = 9980
+```
+manager_cluster为ETCT地址
 
-会看到有以下的镜像正在运行当中
+httpport为Service Center绑定的端口
 
-<figure>
-  <img src="{{ '/assets/images/docker-runtime.png' | absolute_url }}" alt="docker运行时的容器">
-  <figcaption>jaxrs-server:0.1.0-m2-SNAPSHOT和seanyinx/sc两个容器在运行.</figcaption>
-</figure>
-
-根据图片可以看到容器seanyinx/sc的端口是*32771*
-
-如果您使用的是docker machine，你还需要通过以下的指令获取docker machina运行的IP
+运行Service Center二进制文件
 
 ```bash
-> docker-machine ip
-
+> ./service-center
 ```
 
-同时进入文件夹*demo/demo-jaxrs/jaxrs-client/src/main/resources*下的microservice.yaml文件
+#### 2. 通过docker镜像运行Service Center
 
-```yaml
-APPLICATION_ID: jaxrstest
-service_description:
-  name: jaxrsClient
-  version: 0.0.1
-cse:
-  service:
-    registry:
-      address: http://IP:PORT
-  handler:
-    chain:
-      Consumer:
-        default: bizkeeper-consumer,loadbalance
-  references:
-    jaxrs:
-      version-rule: 0.0.1
+```bash
+> docker pull seanyinx/sc
+> docker run -d -p 9980:9980 seanyinx/sc:latest
 ```
 
-如果您安装的是原生docker，IP为 127.0.0.1，如果安装的是docker machine则IP为通过`docker-machine ip`指令获取的IP。同时端口则通过`docker ps`指令获取到容器seanyinx/sc映射的PORT为32771。则对于原生docker来说microservice.yaml中 **http://IP:PORT** 为http://**127.0.0.1:32771**
+**Note:** Service Center运行后的绑定IP为http://127.0.0.1:9980。
+{: .notice--warning}
 
-运行JaxrsClient的main函数则能看到client成功调用了微服务。
+### 运行相应的Demo
+
+首先运行Demo工程的Server工程
+
+再运行Demo工程中的Client工程
+
+则能看到微服务调用的效果
+
+
+
+
