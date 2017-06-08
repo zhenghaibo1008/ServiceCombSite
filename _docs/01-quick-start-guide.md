@@ -79,7 +79,7 @@ httpport为Service Center绑定的端口
 
 ### 例子代码
 
-**服务契约**
+**服务接口**
 
 ```java
 public interface Hello {
@@ -142,20 +142,4 @@ public class SimpleClient {
 	...
 	System.out.println(hello.sayHi("servicecomb"))
 }
-```
-
-## 自动测试
-构建并运行docker镜像，同时进行集成测试使用一下命令:
-
-
-```bash
-> cd java-chassis
-> mvn clean install -Pdocker
-```
-
-如果您机器安装的是docker machine则使用以下命令:
-
-```bash
-> cd java-chassis
-> mvn clean install -Pdocker -Pdocker-machine
 ```
