@@ -11,7 +11,7 @@ title                    : "ServiceComb"
 title_separator          : "-"
 name                     : "ServiceComb" # &name is a YAML anchor which can be *referenced later
 description              : "The homepage of ServiceComb"
-url                      : # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+url                      : "https://www.ServiceComb.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "ServiceComb/java-chassis"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -55,9 +55,9 @@ yandex_site_verification :
 
 # Social Sharing
 twitter:
-  username               : 
+  username               : willemjiang
 facebook:
-  username               : 
+  username               :
   app_id                 :
   publisher              :
 og_image                 :  # Open Graph/Twitter default site image
@@ -83,17 +83,17 @@ author:
   bio              : "ServiceComb提供了一套关于服务注册，服务发现，服务配置以及管理功能的微服务框架"
   location         : "China"
   email            :
-  uri              : 
+  uri              :
   bitbucket        :
   codepen          :
   dribbble         :
   flickr           :
-  facebook         : 
+  facebook         :
   foursquare       :
-  github           : 
+  github           :
   google_plus      :
   keybase          :
-  instagram        : 
+  instagram        :
   lastfm           :
   linkedin         :
   pinterest        :
@@ -101,7 +101,7 @@ author:
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : 
+  twitter          :
   vine             :
   weibo            :
   xing             :
