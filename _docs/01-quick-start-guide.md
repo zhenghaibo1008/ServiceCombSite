@@ -31,7 +31,7 @@ redirect_from:
 
 
 ## 简单示例
-### 首先运行Service Center
+### 启动Service Center
 
 有两种方式运行Service Center:
 
@@ -79,7 +79,7 @@ httpport为Service Center绑定的端口
 
 ### 例子代码
 
-#### 服务契约
+**服务契约**
 
 ```java
 public interface Hello {
@@ -87,7 +87,8 @@ public interface Hello {
 }
 ```
 
-#### 服务实现
+**服务实现**
+
 实现服务契约接口HelloImpl.java
 
 ```java
@@ -97,7 +98,7 @@ public class HelloImpl implements Hello {
     }
 }
 ```
-#### 服务发布
+**服务发布**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -112,7 +113,7 @@ public class HelloImpl implements Hello {
 		implementation="io.servicecomb.demo.server.HelloImpl"></cse:rpc-schema>
 </beans>
 ```
-#### 调用声明
+**调用声明**
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -129,7 +130,7 @@ public class HelloImpl implements Hello {
 
 ```
 
-#### 服务调用
+**服务调用**
 调用端在加载完日志配置、sdk配置后，就可以对服务进行远程调用了。
 ```
 public class SimpleClient {
