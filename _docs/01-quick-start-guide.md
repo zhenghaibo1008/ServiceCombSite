@@ -29,23 +29,8 @@ redirect_from:
 > mvn clean install
 ```
 
-## 自动测试
-构建并运行docker镜像，同时进行集成测试使用一下命令:
 
-
-```bash
-> cd java-chassis
-> mvn clean install -Pdocker
-```
-
-如果您机器安装的是docker machine则使用以下命令:
-
-```bash
-> cd java-chassis
-> mvn clean install -Pdocker -Pdocker-machine
-```
-
-## 运行Demo
+## 简单示例
 ### 首先运行Service Center
 
 有两种方式运行Service Center:
@@ -92,14 +77,79 @@ httpport为Service Center绑定的端口
 **Note:** Service Center运行后的绑定IP为http://127.0.0.1:9980。
 {: .notice--warning}
 
-### 运行相应的Demo
+### 例子代码
 
-首先运行Demo工程的Server工程
+#### 服务契约
 
-再运行Demo工程中的Client工程
+```java
+public interface Hello {
+    String sayHi(String name);
+}
+```
 
-则能看到微服务调用的效果
+#### 服务实现
+实现服务契约接口HelloImpl.java
+
+```java
+public class HelloImpl implements Hello {
+    public String sayHi(String name) {
+        return "Hello " + name;
+    }
+}
+```
+#### 服务发布
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:cse="http://www.huawei.com/schema/paas/cse/rpc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.huawei.com/schema/paas/cse/rpc classpath:META-INF/spring/spring-paas-cse-rpc-1.0.xsd">
+	<cse:rpc-schema schema-id="hello"
+		implementation="io.servicecomb.demo.server.HelloImpl"></cse:rpc-schema>
+</beans>
+```
+#### 调用声明
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:util="http://www.springframework.org/schema/util" xmlns:cse="http://www.huawei.com/schema/paas/cse/rpc"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans classpath:org/springframework/beans/factory/xml/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+        http://www.huawei.com/schema/paas/cse/rpc classpath:META-INF/spring/spring-paas-cse-rpc-1.0.xsd">
+    <cse:rpc-reference id="hello" schema-id="hello"
+        microservice-name="helloserver"></cse:rpc-reference>
+</beans>
+
+```
+
+#### 服务调用
+调用端在加载完日志配置、sdk配置后，就可以对服务进行远程调用了。
+```
+public class SimpleClient {
+	...
+	System.out.println(hello.sayHi("servicecomb"))
+}
+```
+
+## 自动测试
+构建并运行docker镜像，同时进行集成测试使用一下命令:
 
 
+```bash
+> cd java-chassis
+> mvn clean install -Pdocker
+```
 
+如果您机器安装的是docker machine则使用以下命令:
 
+```bash
+> cd java-chassis
+> mvn clean install -Pdocker -Pdocker-machine
+```
