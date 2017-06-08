@@ -35,7 +35,7 @@ redirect_from:
 
 有两种方式运行Service Center:
 
-#### 1. 通过运行二进制文件：
+1.通过运行二进制文件：
 
 
 ```bash
@@ -67,7 +67,7 @@ httpport为Service Center绑定的端口
 > ./service-center
 ```
 
-#### 2. 通过docker镜像运行Service Center
+2.通过docker镜像运行Service Center
 
 ```bash
 > docker pull seanyinx/sc
